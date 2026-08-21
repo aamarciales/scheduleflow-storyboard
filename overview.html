@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>BRIX Publish Scheduler · plugin storyboard</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <style>
+      :root {
+        --canvas: #e9e9e9;
+        --ink: #1f1f1f;
+        --muted: #777777;
+        --chip: #151515;
+        --frame-w: 320px;
+        --frame-h: 500px;
+      }
+      * { box-sizing: border-box; }
+      body {
+        margin: 0;
+        background: var(--canvas);
+        font-family: Inter, sans-serif;
+        color: var(--ink);
+        padding: 40px 32px 80px;
+      }
+      .page-head { max-width: 720px; margin: 0 auto 8px; }
+      .eyebrow { color: #006acc; font-size: 11px; font-weight: 700; letter-spacing: 0.9px; text-transform: uppercase; }
+      .page-head h1 { margin: 6px 0 6px; font-size: 26px; line-height: 1.2; font-weight: 700; }
+      .page-head p { margin: 0; color: var(--muted); font-size: 13px; line-height: 1.5; }
+      .wrap { max-width: 1400px; margin: 0 auto; }
+      section { margin-top: 52px; }
+      .section-head { max-width: 720px; margin: 0 auto 20px; }
+      .section-head h2 { margin: 0 0 4px; font-size: 17px; font-weight: 700; }
+      .section-head p { margin: 0; color: var(--muted); font-size: 13px; line-height: 1.5; }
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(var(--frame-w), var(--frame-w)));
+        gap: 44px 32px;
+        justify-content: center;
+      }
+      .panel { width: var(--frame-w); display: flex; flex-direction: column; gap: 12px; }
+      .panel-head { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 0 2px; }
+      .panel-id { display: flex; align-items: center; gap: 10px; min-width: 0; }
+      .num { flex: 0 0 auto; width: 32px; height: 32px; border-radius: 4px; background: var(--chip); color: #fff; font-size: 12px; font-weight: 700; display: flex; align-items: center; justify-content: center; }
+      .panel-copy { min-width: 0; }
+      .panel-copy strong { display: block; font-size: 14px; font-weight: 700; line-height: 1.3; }
+      .panel-copy span { display: block; color: var(--muted); font-size: 11px; line-height: 1.4; }
+      .tag { flex: 0 0 auto; color: var(--muted); font-size: 11px; font-weight: 500; }
+      .frame {
+        width: var(--frame-w);
+        height: var(--frame-h);
+        border-radius: 4px;
+        overflow: hidden;
+        background: #1e1e1e;
+        box-shadow: 0 12px 40px rgba(0, 0, 0, 0.16);
+      }
+      .frame iframe { width: 100%; height: 100%; border: 0; display: block; }
+    </style>
+  </head>
+  <body>
+    <div class="page-head">
+      <div class="eyebrow">Webflow App · UI walkthrough</div>
+      <h1>BRIX Publish Scheduler plugin storyboard</h1>
+      <p>
+        Ten essential, live and clickable screens for reviewing the visual system without repeated layouts. Every frame is exactly
+        <strong>320 × 500</strong>. This is fixture-only HTML: it never calls Webflow or the Worker.
+      </p>
+    </div>
+
+    <div class="wrap">
+      <section>
+        <div class="section-head">
+          <h2>Core publishing flow</h2>
+          <p>One screen per essential visual pattern: Full site / CMS / Page → When → Review → Scheduled.</p>
+        </div>
+        <div class="grid" id="grid-flow"></div>
+      </section>
+
+      <section>
+        <div class="section-head">
+          <h2>Account and connection states</h2>
+          <p>The configuration view plus the two states that block scheduling until Webflow access is restored.</p>
+        </div>
+        <div class="grid" id="grid-account"></div>
+      </section>
+    </div>
+
+    <script>
+      const PANELS = {
+        "grid-flow": [
+          { n: "01", title: "Choose full site", sub: "Choose the exact Webflow publish destination.", tag: "Target", state: "fullsite" },
+          { n: "02", title: "Choose CMS items", sub: "Exact supplied collection, action, search and statuses.", tag: "Reference", state: "cms" },
+          { n: "03", title: "Choose a page", sub: "Pages come from Webflow; this fixture shows the plan or permission restricted state.", tag: "Restricted", state: "page_restricted" },
+          { n: "04", title: "Choose when", sub: "One interactive repeat control plus native date and time pickers.", tag: "Reference", state: "when_repeat" },
+          { n: "05", title: "Review", sub: "One visual review pattern, without repeated information variants.", tag: "Reference", state: "review_page" },
+          { n: "06", title: "Schedule created", sub: "Clear success state with the supplied confirmation artwork.", tag: "Success", state: "done" },
+          { n: "07", title: "Scheduled activity", sub: "One pending schedule with valid reschedule and cancel actions.", tag: "Pending", state: "activity" },
+        ],
+        "grid-account": [
+          { n: "08", title: "Account", sub: "Plugin information and the site disconnect action only.", tag: "About", state: "account" },
+          { n: "09", title: "No site connected", sub: "Connection recovery uses the same visual composition as schedule confirmation.", tag: "Connect", state: "connect" },
+          { n: "10", title: "Connection lost", sub: "Lost access uses the same visual composition as schedule confirmation.", tag: "Reconnect", state: "connection_lost" },
+        ],
+      };
+
+      for (const [gridId, panels] of Object.entries(PANELS)) {
+        const grid = document.getElementById(gridId);
+        for (const p of panels) {
+          const el = document.createElement("div");
+          el.className = "panel";
+          el.innerHTML = `
+            <div class="panel-head">
+              <div class="panel-id">
+                <div class="num">${p.n}</div>
+                <div class="panel-copy"><strong>${p.title}</strong><span>${p.sub}</span></div>
+              </div>
+              <div class="tag">${p.tag}</div>
+            </div>
+            <div class="frame"><iframe loading="lazy" title="${p.title}" src="./panel.html?state=${p.state}"></iframe></div>`;
+          grid.appendChild(el);
+        }
+      }
+    </script>
+  </body>
+</html>
