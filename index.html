@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>ScheduleFlow · plugin storyboard</title>
+    <title>BRIX Publish Scheduler · plugin storyboard</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
@@ -14,7 +14,7 @@
         --muted: #777777;
         --chip: #151515;
         --frame-w: 320px;
-        --frame-h: 460px;
+        --frame-h: 500px;
       }
       * { box-sizing: border-box; }
       body {
@@ -42,7 +42,7 @@
       .panel { width: var(--frame-w); display: flex; flex-direction: column; gap: 12px; }
       .panel-head { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 0 2px; }
       .panel-id { display: flex; align-items: center; gap: 10px; min-width: 0; }
-      .num { flex: 0 0 auto; width: 32px; height: 32px; border-radius: 9px; background: var(--chip); color: #fff; font-size: 12px; font-weight: 700; display: flex; align-items: center; justify-content: center; }
+      .num { flex: 0 0 auto; width: 32px; height: 32px; border-radius: 4px; background: var(--chip); color: #fff; font-size: 12px; font-weight: 700; display: flex; align-items: center; justify-content: center; }
       .panel-copy { min-width: 0; }
       .panel-copy strong { display: block; font-size: 14px; font-weight: 700; line-height: 1.3; }
       .panel-copy span { display: block; color: var(--muted); font-size: 11px; line-height: 1.4; }
@@ -50,7 +50,7 @@
       .frame {
         width: var(--frame-w);
         height: var(--frame-h);
-        border-radius: 12px;
+        border-radius: 4px;
         overflow: hidden;
         background: #1e1e1e;
         box-shadow: 0 12px 40px rgba(0, 0, 0, 0.16);
@@ -61,64 +61,46 @@
   <body>
     <div class="page-head">
       <div class="eyebrow">Webflow App · UI walkthrough</div>
-      <h1>ScheduleFlow plugin storyboard</h1>
+      <h1>BRIX Publish Scheduler plugin storyboard</h1>
       <p>
-        Every panel is live and clickable — walk the Activity → What → When → Review flow right in the grid. Each frame renders
-        the redesigned Designer Extension markup with the production styles at Webflow's real <strong>comfortable</strong> size
-        (320 × 460). Scrollbars are hidden with a bottom fade to signal more content, and the BRIX credit lives in the Account ›
-        About section rather than the footer.
+        Ten essential, live and clickable screens for reviewing the visual system without repeated layouts. Every frame is exactly
+        <strong>320 × 500</strong>. This is fixture-only HTML: it never calls Webflow or the Worker.
       </p>
     </div>
 
     <div class="wrap">
       <section>
         <div class="section-head">
-          <h2>Entry and scheduling flow</h2>
-          <p>The core path a user takes to schedule a publish: pick what, pick when, review, and confirm.</p>
+          <h2>Core publishing flow</h2>
+          <p>One screen per essential visual pattern: Full site / CMS / Page → When → Review → Scheduled.</p>
         </div>
         <div class="grid" id="grid-flow"></div>
       </section>
 
       <section>
         <div class="section-head">
-          <h2>Account and access</h2>
-          <p>Managing the connection, protected disconnect, and first-run authorization.</p>
+          <h2>Account and connection states</h2>
+          <p>The configuration view plus the two states that block scheduling until Webflow access is restored.</p>
         </div>
         <div class="grid" id="grid-account"></div>
-      </section>
-
-      <section>
-        <div class="section-head">
-          <h2>Restrictions and recovery</h2>
-          <p>Blocking states never schedule anything and always give one clear next action.</p>
-        </div>
-        <div class="grid" id="grid-blocks"></div>
       </section>
     </div>
 
     <script>
       const PANELS = {
         "grid-flow": [
-          { n: "01", title: "Ready on Canvas", sub: "Empty activity with one essential action.", tag: "Entry", state: "activity_empty" },
-          { n: "02", title: "Scheduled publishes", sub: "Waiting and verified jobs with unified status dots.", tag: "Overview", state: "activity_jobs" },
-          { n: "03", title: "What — whole site", sub: "Selected card expands its description in place.", tag: "Step 1", state: "what_site" },
-          { n: "04", title: "What — CMS items", sub: "Collection, action, filter and item states.", tag: "Step 1", state: "what_cms" },
-          { n: "05", title: "When — preset", sub: "Quick one-time moment, no repeat needed.", tag: "Step 2", state: "when" },
-          { n: "06", title: "When — pick a moment", sub: "Custom date, time and repeat rule.", tag: "Step 2", state: "when_custom" },
-          { n: "07", title: "Review", sub: "Summary, live-check countdown and confirm.", tag: "Step 3", state: "confirm" },
-          { n: "07", title: "Scheduled", sub: "Confirmation with the waiting job.", tag: "Done", state: "done" },
+          { n: "01", title: "Choose full site", sub: "Choose the exact Webflow publish destination.", tag: "Target", state: "fullsite" },
+          { n: "02", title: "Choose CMS items", sub: "Exact supplied collection, action, search and statuses.", tag: "Reference", state: "cms" },
+          { n: "03", title: "Choose a page", sub: "Pages come from Webflow; this fixture shows the plan or permission restricted state.", tag: "Restricted", state: "page_restricted" },
+          { n: "04", title: "Choose when", sub: "One interactive repeat control plus native date and time pickers.", tag: "Reference", state: "when_repeat" },
+          { n: "05", title: "Review", sub: "One visual review pattern, without repeated information variants.", tag: "Reference", state: "review_page" },
+          { n: "06", title: "Schedule created", sub: "Clear success state with the supplied confirmation artwork.", tag: "Success", state: "done" },
+          { n: "07", title: "Scheduled activity", sub: "One pending schedule with valid reschedule and cancel actions.", tag: "Pending", state: "activity" },
         ],
         "grid-account": [
-          { n: "08", title: "Account", sub: "Site, role, plan and connection controls.", tag: "Account", state: "account" },
-          { n: "09", title: "Disconnect", sub: "Protected confirmation before revoking access.", tag: "Protected", state: "disconnect" },
-          { n: "10", title: "Connect this site", sub: "First-run authorization entry point.", tag: "Onboarding", state: "connect" },
-        ],
-        "grid-blocks": [
-          { n: "11", title: "Design or Build only", sub: "Unsupported Designer modes.", tag: "Mode", state: "block_mode" },
-          { n: "12", title: "Another site authorized", sub: "Connection belongs to a different site.", tag: "Access", state: "block_othersite" },
-          { n: "13", title: "Custom domain, not yet", sub: "Beta publishes to .webflow.io only.", tag: "Beta limit", state: "block_domain" },
-          { n: "14", title: "Backend unreachable", sub: "Pre-save check failed, nothing scheduled.", tag: "Recovery", state: "block_backend" },
-          { n: "15", title: "Job statuses", sub: "Checking, not confirmed, and rejected results.", tag: "States", state: "activity_statuses" },
+          { n: "08", title: "Account", sub: "Plugin information and the site disconnect action only.", tag: "About", state: "account" },
+          { n: "09", title: "No site connected", sub: "Connection recovery uses the same visual composition as schedule confirmation.", tag: "Connect", state: "connect" },
+          { n: "10", title: "Connection lost", sub: "Lost access uses the same visual composition as schedule confirmation.", tag: "Reconnect", state: "connection_lost" },
         ],
       };
 
