@@ -75,12 +75,18 @@
           ["21","Site mismatch","Current blocking treatment for another connected site.","Blocked","restriction_mismatch"]
         ]
       };
+      const panelSource = (state) => {
+        if (location.hostname !== "htmlpreview.github.io") return `./panel.html?state=${state}`;
+        const sourceUrl = decodeURIComponent(location.search.slice(1));
+        const sourceDirectory = sourceUrl.slice(0, sourceUrl.lastIndexOf("/") + 1);
+        return `https://htmlpreview.github.io/?${sourceDirectory}panel.html?state=${state}`;
+      };
       for (const [group, panels] of Object.entries(groups)) {
         const grid = document.querySelector(`[data-group="${group}"]`);
         for (const [number,title,description,tag,state] of panels) {
           const panel = document.createElement("article");
           panel.className = "panel";
-          panel.innerHTML = `<div class="panel-head"><div class="num">${number}</div><div class="panel-copy"><strong>${title}</strong><span>${description}</span></div><span class="tag">${tag}</span></div><div class="frame"><iframe title="${title}" src="./panel.html?state=${state}"></iframe></div>`;
+          panel.innerHTML = `<div class="panel-head"><div class="num">${number}</div><div class="panel-copy"><strong>${title}</strong><span>${description}</span></div><span class="tag">${tag}</span></div><div class="frame"><iframe title="${title}" src="${panelSource(state)}"></iframe></div>`;
           grid.appendChild(panel);
         }
       }
