@@ -220,7 +220,8 @@ button { color: inherit; }
 .activity-content {
   display: flex;
   flex-direction: column;
-  overflow: hidden;
+  overflow-x: hidden;
+  overflow-y: auto;
 }
 .activity-content > .pad {
   width: 100%;
@@ -276,6 +277,7 @@ button { color: inherit; }
   border-radius: var(--radius);
   background: rgba(255,255,255,.04);
 }
+.schedule-list { display: flex; flex-direction: column; gap: 8px; }
 .schedule-target,
 .schedule-actions,
 .account-link {
