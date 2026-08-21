@@ -79,7 +79,7 @@
         if (location.hostname !== "htmlpreview.github.io") return `./panel.html?state=${state}`;
         const sourceUrl = decodeURIComponent(location.search.slice(1));
         const sourceDirectory = sourceUrl.slice(0, sourceUrl.lastIndexOf("/") + 1);
-        return `https://htmlpreview.github.io/?${sourceDirectory}panel.html?state=${state}`;
+        return `https://htmlpreview.github.io/?${sourceDirectory}panel.html#state=${state}`;
       };
       for (const [group, panels] of Object.entries(groups)) {
         const grid = document.querySelector(`[data-group="${group}"]`);
