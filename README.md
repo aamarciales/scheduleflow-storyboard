@@ -1,7 +1,18 @@
-# BRIX Publish Scheduler plugin storyboard
+# BRIX Publish Scheduler production storyboard
 
-Interactive UI walkthrough of the BRIX Publish Scheduler Webflow Designer Extension.
+Interactive snapshot of the Designer Extension UI published for internal testing on August 21, 2026.
 
-Open **[the GitHub Pages site](https://aamarciales.github.io/scheduleflow-storyboard/)** to review every screen. The source follows the user-supplied `Plugin.svg`, `Plugin-1.svg`, and `Plugin-2.svg` direction at exactly 320 × 500. Panels are clickable: walk Page / CMS / Full site → When → Review → Scheduled, plus Activity, Account, and recovery states, without installing the App.
+Open [the complete storyboard](./overview.html) or [the interactive panel](./panel.html?state=fullsite).
 
-This repo contains only static HTML, CSS, and JavaScript. It does not call Webflow or the production Worker.
+## Fidelity contract
+
+- `storyboard.js` is compiled from the production `FinalPanel.tsx` component.
+- `production.css` and `assets/` are copied from `extension/public/`, the source of the uploaded Webflow bundle.
+- The storyboard adds only deterministic fixture state and safe local callbacks. It does not call Webflow or the production Worker.
+- Frames are 320 × 500. Webflow's native Designer title bar is outside the extension bundle and is therefore not duplicated in the frames.
+
+Rebuild from the project root with:
+
+```bash
+npm run storyboard:build
+```

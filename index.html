@@ -1,52 +1,30 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>ScheduleFlow plugin storyboard</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="./panel.css" />
+    <title>BRIX Publish Scheduler · production storyboard</title>
+    <style>
+      * { box-sizing:border-box; }
+      body { margin:0; min-height:100vh; display:grid; place-items:center; padding:24px; background:#ededed; color:#202020; font-family:Inter,ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif; }
+      main { width:min(680px,100%); }
+      .eyebrow { color:#0d78d8; font-size:11px; font-weight:700; letter-spacing:.08em; text-transform:uppercase; }
+      h1 { margin:8px 0 10px; font-size:32px; line-height:1.1; }
+      p { color:#666; line-height:1.6; }
+      .actions { display:flex; flex-wrap:wrap; gap:10px; margin:24px 0; }
+      a { color:inherit; }
+      .button { display:inline-flex; padding:11px 15px; border-radius:6px; background:#0d78d8; color:#fff; font-weight:700; text-decoration:none; }
+      .button.secondary { background:#fff; color:#202020; }
+      .note { padding:16px; border-radius:8px; background:#fff; font-size:13px; }
+    </style>
   </head>
   <body>
-    <div class="stage">
-      <div class="chooser">
-        <p class="kicker">BRIX Publish Scheduler</p>
-        <h1>New plugin storyboard · supplied design</h1>
-        <p class="muted">
-          Faithful 320×500 reconstruction of the supplied Plugin, Plugin-1,
-          and Plugin-2 references, extended through the complete protected
-          scheduling flow. Fixture data only. No network and no Webflow writes.
-        </p>
-        <article class="card">
-          <h2>Open the panel</h2>
-          <p class="muted">Click Page, CMS, Full site, When, Review, Activity and Account inside the live mock.</p>
-          <p><a href="./panel.html?state=page">Open interactive plugin</a></p>
-          <p><a href="./overview.html">Open the complete storyboard grid</a></p>
-        </article>
-        <article class="card">
-          <h2>Independent states</h2>
-          <p class="muted">
-            <a href="./panel.html?state=page">page</a> ·
-            <a href="./panel.html?state=cms">cms</a> ·
-            <a href="./panel.html?state=fullsite">full site</a> ·
-            <a href="./panel.html?state=when_repeat">when</a> ·
-            <a href="./panel.html?state=review_page">review page</a> ·
-            <a href="./panel.html?state=review_cms">review cms</a> ·
-            <a href="./panel.html?state=review_site">review site</a> ·
-            <a href="./panel.html?state=done">scheduled</a> ·
-            <a href="./panel.html?state=activity">activity</a> ·
-            <a href="./panel.html?state=account">account</a> ·
-            <a href="./panel.html?state=disconnect">disconnect</a> ·
-            <a href="./panel.html?state=connect">connect</a> ·
-            <a href="./panel.html?state=restriction_plan">plan restriction</a> ·
-            <a href="./panel.html?state=restriction_mode">mode restriction</a> ·
-            <a href="./panel.html?state=restriction_offline">offline</a> ·
-            <a href="./panel.html?state=restriction_mismatch">site mismatch</a>
-          </p>
-        </article>
-      </div>
-    </div>
+    <main>
+      <div class="eyebrow">Published UI snapshot · August 21, 2026</div>
+      <h1>BRIX Publish Scheduler</h1>
+      <p>This storyboard is generated from the same production React component, CSS, and SVG assets uploaded to Webflow for internal testing.</p>
+      <div class="actions"><a class="button" href="./overview.html">Open complete storyboard</a><a class="button secondary" href="./panel.html?state=fullsite">Open interactive panel</a></div>
+      <div class="note"><strong>Safe preview.</strong> All data and callbacks are local fixtures. The storyboard never calls Webflow or the ScheduleFlow Worker.</div>
+    </main>
   </body>
 </html>
