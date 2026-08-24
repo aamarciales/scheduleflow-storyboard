@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>BRIX Publish Scheduler · 380 × 500 preview</title>
+    <style>
+      * { box-sizing: border-box; }
+      html, body { min-height: 100%; }
+      body {
+        margin: 0;
+        padding: 24px;
+        background: #ececec;
+        color: #333;
+        font: 12px/1.4 Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      }
+      .preview { width: 380px; }
+      .preview-label { margin: 0 0 8px; color: #666; font-weight: 600; }
+      iframe {
+        display: block;
+        width: 380px;
+        height: 500px;
+        border: 0;
+        border-radius: 5px;
+        background: #1e1e1e;
+        box-shadow: 0 12px 38px rgba(0, 0, 0, 0.18);
+      }
+    </style>
+  </head>
+  <body>
+    <main class="preview">
+      <p class="preview-label">Plugin preview · 380 × 500 px</p>
+      <iframe id="plugin-preview" title="BRIX Publish Scheduler"></iframe>
+    </main>
+    <script>
+      const state = new URLSearchParams(window.location.search).get("state") || "review_refined";
+      document.getElementById("plugin-preview").src = `./panel.html?state=${encodeURIComponent(state)}`;
+    </script>
+  </body>
+</html>

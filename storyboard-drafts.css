@@ -1,0 +1,64 @@
+.story-state {
+  display: contents;
+}
+
+.story-state-page .page-list > .list-section:last-of-type,
+.story-state-page_plan_check .page-list > .list-section:last-of-type,
+.story-state-page_restricted .page-list > .list-section:last-of-type,
+.story-state-page .page-list > .quiet,
+.story-state-page_plan_check .page-list > .quiet,
+.story-state-page_restricted .page-list > .quiet {
+  display: none;
+}
+
+.storyboard-review-card {
+  overflow: visible;
+}
+
+.storyboard-review-card .review-row {
+  position: relative;
+  min-height: 36px;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.storyboard-review-card .review-row:has(.storyboard-tooltip-wrap:hover),
+.storyboard-review-card .review-row:has(.storyboard-tooltip-wrap:focus),
+.storyboard-review-card .review-row:has(.storyboard-tooltip-wrap:focus-within) {
+  z-index: 40;
+}
+
+.storyboard-review-card .review-row:first-child {
+  border-radius: var(--radius) var(--radius) 0 0;
+}
+
+.storyboard-review-card .review-row:last-child {
+  border-radius: 0 0 var(--radius) var(--radius);
+}
+
+.storyboard-tooltip-wrap {
+  display: inline-block;
+  width: auto;
+  max-width: 100%;
+  vertical-align: bottom;
+}
+
+.storyboard-review-card .review-row dd:has(.storyboard-tooltip-wrap.is-truncated) {
+  overflow: visible;
+}
+
+.storyboard-tooltip-wrap:not(.is-truncated) {
+  cursor: default;
+}
+
+.storyboard-tooltip-wrap.is-truncated {
+  cursor: default;
+}
+
+.storyboard-tooltip-wrap .review-tooltip {
+  right: auto;
+  bottom: auto;
+  top: calc(100% + 6px);
+  left: -72px;
+  width: calc(100% + 72px);
+}
